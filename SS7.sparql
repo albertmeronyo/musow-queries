@@ -1,0 +1,16 @@
+#+ summary:  Which resources reuse them?
+#+ tags:
+#+    - services-software
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?resourceLabel ?otherLabel (count(DISTINCT ?otherResource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?resourceLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             ^<http://www.w3.org/2004/02/skos/core#related> ?otherResource .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel in ('Service', "Software")) .
+   ?otherResource rdfs:label ?otherLabel
+}
+GROUP BY ?resourceLabel ?otherLabel ?count
+ORDER BY ?resourceLabel

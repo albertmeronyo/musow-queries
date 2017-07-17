@@ -1,0 +1,15 @@
+#+ summary:  How many of them provide structured data about notated music?
+#+ tags:
+#+    - libraries-repositories
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   filter( str(?format) IN ("http://data.open.ac.uk/mudow/musicxml" , "http://data.open.ac.uk/mudow/xml", 
+    "http://data.open.ac.uk/mudow/rdf", "http://data.open.ac.uk/mudow/mei/xml", "http://data.open.ac.uk/mudow/cap/xml", "http://data.open.ac.uk/mudow/humdrum", "http://data.open.ac.uk/mudow/kern", "http://data.open.ac.uk/mudow/lilypond", "http://data.open.ac.uk/mudow/musedata", "http://data.open.ac.uk/mudow/musescore", "http://data.open.ac.uk/mudow/myr", "http://data.open.ac.uk/mudow/noteworthy", "http://data.open.ac.uk/mudow/py", "http://data.open.ac.uk/mudow/ram", "http://data.open.ac.uk/mudow/mu2"))
+}

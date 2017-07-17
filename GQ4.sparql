@@ -1,0 +1,13 @@
+#+ summary:  What is the extent of gathered resources? Results refer to the number of musical items collected by the described resources. When a Linked Dataset is described, the extent refers to the number of RDF triples.
+#+ tags:
+#+    - general
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?label (COUNT(?project) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+  ?project <http://purl.org/dc/terms/extent> ?size .
+  ?size rdfs:label ?label .
+}
+GROUP BY ?label
+ORDER BY ?label

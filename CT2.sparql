@@ -1,0 +1,17 @@
+#+ summary:  What's the focus of resources gathered by means of catalogs? Results refer to the original sources analysed by the collected resources, i.e. audio files, notated music or simply cataloguing metadata.
+#+ tags:
+#+    - catalogs
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?categoryLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+  ?catalogue rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?catalogueType .
+  ?catalogueType rdfs:label ?typeLabel . filter(?typeLabel="Catalogue") .
+  ?resource <http://purl.org/spar/fabio/hasSubjectTerm> ?catalogue ; 
+            <http://dbpedia.org/ontology/category> ?category .
+  ?category rdfs:label ?categoryLabel .
+}
+GROUP BY ?categoryLabel ?count
+ORDER BY ?count

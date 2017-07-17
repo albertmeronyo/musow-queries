@@ -1,0 +1,15 @@
+#+ summary:  How many of them provide digitizations of scores or songs? Results refere to a combination of image formats that are generally used to publish music contents. 
+#+ tags:
+#+    - libraries-repositories
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   filter( str(?format) IN ("http://data.open.ac.uk/mudow/pdf" , "http://data.open.ac.uk/mudow/jpg", 
+    "http://data.open.ac.uk/mudow/tiff", "http://data.open.ac.uk/mudow/iiif", "http://data.open.ac.uk/mudow/gif", "http://data.open.ac.uk/mudow/png", "http://data.open.ac.uk/mudow/djvu"))
+}

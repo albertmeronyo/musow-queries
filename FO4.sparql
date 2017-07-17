@@ -1,0 +1,14 @@
+#+ summary:  Which musical features do they mostly represent?
+#+ tags:
+#+    - formats
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT  ?featureLabel ?formatLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource <http://xmlns.com/foaf/0.1/primaryTopic> ?feature ;
+             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+   ?feature rdfs:label ?featureLabel . ?format rdfs:label ?formatLabel .
+}
+GROUP BY ?featureLabel ?formatLabel ?count
+ORDER BY  DESC(?count)

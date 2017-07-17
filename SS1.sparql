@@ -1,0 +1,12 @@
+#+ summary:  How many software and services are available on the web? The focus of the survey is on data rather than SW, thus results might not be exhaustive. Moreover, results refer to resources that have been either reused or mentioned by projects included in the survey.
+#+ tags:
+#+    - services-software
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType .
+  ?resourceType rdfs:label ?typeLabel . filter(?typeLabel in ('Software', 'Service')) .
+}

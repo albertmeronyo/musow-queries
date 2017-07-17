@@ -1,0 +1,16 @@
+#+ summary:  Is this content properly licensed? Which licences are used?
+#+ tags:
+#+    - datasets
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?licenseLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://purl.org/dc/terms/license> ?license .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Dataset') .
+   ?license rdfs:label ?licenseLabel
+}
+GROUP BY ?licenseLabel ?count
+ORDER BY DESC(?count)

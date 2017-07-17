@@ -1,0 +1,20 @@
+#+ summary:  Considering resources gathered by catalogs targeted on researchers, performers and scholars, what is their extent? Results refer to the estimated number of items collected by each resource.
+#+ tags:
+#+    - catalogs
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT (count(DISTINCT ?resource) AS ?count) ?extent
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+    ?resource <http://purl.org/dc/terms/audience> ?typeaudience ; 
+              <http://purl.org/dc/terms/audience> ?typeaudience2 ; 
+              <http://purl.org/dc/terms/audience> ?typeaudience3 ;
+              <http://purl.org/dc/terms/extent> ?extenttype .
+    ?extenttype rdfs:label ?extent .
+    ?typeaudience rdfs:label ?audience .
+    ?typeaudience2 rdfs:label ?audience2 .
+    ?typeaudience3 rdfs:label ?audience3 .
+    filter(?audience="researchers" ) . filter(?audience2="performers"). filter(?audience3="scholars").
+}
+GROUP BY ?extent
+ORDER BY ?extent

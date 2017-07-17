@@ -1,0 +1,15 @@
+#+ summary:  Do the sources collected in digital libraries and repositories are audio tracks, symbolic notation or metadata?
+#+ tags:
+#+    - libraries-repositories
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?categoryLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://dbpedia.org/ontology/category> ?category .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   ?category rdfs:label ?categoryLabel .
+}
+GROUP BY ?categoryLabel ?count

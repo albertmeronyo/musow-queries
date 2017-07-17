@@ -1,0 +1,16 @@
+#+ summary:  Which type of resource deals more with symbolic notation?
+#+ tags:
+#+    - symbolic-notation
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?typeLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://schema.org/featureList> 
+                  <http://data.open.ac.uk/mudow/ontology/feature/symbolic-machine-readable> .
+  ?resourceType rdfs:label ?typeLabel . 
+  ?extent rdfs:label ?extentLabel . 
+}
+GROUP BY ?typeLabel ?count
+ORDER BY desc(?count)

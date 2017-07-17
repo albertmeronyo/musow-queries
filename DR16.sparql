@@ -1,0 +1,13 @@
+#+ summary:  How many repositories are free of charge? 
+#+ tags:
+#+    - libraries-repositories
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://data.open.ac.uk/mudow/ontology/access/type> "Free" . 
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+}

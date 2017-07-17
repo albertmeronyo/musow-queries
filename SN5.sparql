@@ -1,0 +1,15 @@
+#+ summary:  Which symbolic features are more/less represented? 
+#+ tags:
+#+    - symbolic-notation
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?featureLabel (count(DISTINCT ?resource) AS ?symbCount)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://xmlns.com/foaf/0.1/primaryTopic> ?feature .
+  ?resourceType rdfs:label ?typeLabel . 
+  ?feature rdfs:label ?featureLabel
+}
+GROUP BY ?featureLabel ?symbCount 
+ORDER BY desc(?symbCount)

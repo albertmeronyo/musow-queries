@@ -1,0 +1,17 @@
+#+ summary:  Which symbolic features are more/less represented when compared to the scale of those type of resources? 
+#+ tags:
+#+    - symbolic-notation
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?featureLabel ?extentLabel (count(DISTINCT ?resource) AS ?symbCount)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://xmlns.com/foaf/0.1/primaryTopic> ?feature ;
+             <http://purl.org/dc/terms/extent> ?extent.
+  ?resourceType rdfs:label ?typeLabel . 
+  ?extent rdfs:label ?extentLabel . 
+  ?feature rdfs:label ?featureLabel
+}
+GROUP BY ?featureLabel ?extentLabel ?symbCount 
+ORDER BY desc(?symbCount)

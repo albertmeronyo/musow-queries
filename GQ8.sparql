@@ -1,0 +1,16 @@
+#+ summary:  How many resources are useful to both researchers and performers? 
+#+ tags:
+#+    - general
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT (count(DISTINCT ?resource) AS ?count) 
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+  	?resource <http://purl.org/dc/terms/audience> ?typeaudience .
+  	?resource <http://purl.org/dc/terms/audience> ?typeaudience2 .
+   	?typeaudience rdfs:label ?audience .
+  	?typeaudience2 rdfs:label ?audience2 .
+    filter(?audience="researchers" ) . filter(?audience2="performers").
+}
+GROUP BY ?audience
+ORDER BY ?count

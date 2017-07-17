@@ -1,0 +1,17 @@
+#+ summary:  What is the relation between scope and scale?
+#+ tags:
+#+    - libraries-repositories
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?extentLabel ?scopeLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://purl.org/dc/terms/extent> ?extent ; 
+             <http://www.w3.org/ns/oa#hasScope> ?scope .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   ?scope rdfs:label ?scopeLabel . ?extent rdfs:label ?extentLabel .
+}
+GROUP BY ?scopeLabel ?extentLabel ?count
+ORDER BY ?extentLabel DESC(?count)

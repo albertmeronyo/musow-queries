@@ -1,0 +1,18 @@
+#+ summary:  What is the relation between scope and formats?
+#+ tags:
+#+    - libraries-repositories
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?scopeLabel ?formatLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?resourceLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://www.w3.org/ns/oa#hasScope> ?scope ; 
+             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   ?format rdfs:label ?formatLabel .
+   ?scope rdfs:label ?scopeLabel .
+}
+GROUP BY ?scopeLabel ?formatLabel ?count
+ORDER BY ?scopeLabel DESC(?count)

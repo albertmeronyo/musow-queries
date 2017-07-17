@@ -1,0 +1,16 @@
+#+ summary:  Which sources they use to extract features?
+#+ tags:
+#+    - services-software
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?categoryLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://dbpedia.org/ontology/category> ?category .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel in ('Service', "Software")) .
+   ?category rdfs:label ?categoryLabel .
+}
+GROUP BY ?categoryLabel ?count
+ORDER BY desc(?count)

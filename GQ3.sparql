@@ -1,0 +1,13 @@
+#+ summary:  Which criteria have been used to gather such resources? How many resources have been gathered by means of a criterion?
+#+ tags:
+#+    - general
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?searchCriterion ?label (count(?s) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?s <http://purl.org/spar/fabio/hasSubjectTerm> ?searchCriterion .
+   ?searchCriterion rdfs:label ?label .
+}
+GROUP BY ?searchCriterion ?label
+ORDER BY desc(?count)

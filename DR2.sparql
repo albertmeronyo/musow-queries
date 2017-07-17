@@ -1,0 +1,16 @@
+#+ summary:  What is the scale of repositories and digital libraries?
+#+ tags:
+#+    - libraries-repositories
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?extentLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://purl.org/dc/terms/extent> ?extent .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   ?extent rdfs:label ?extentLabel .
+}
+GROUP BY ?extentLabel ?count
+ORDER BY ?count

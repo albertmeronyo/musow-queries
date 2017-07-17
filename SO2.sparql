@@ -1,0 +1,16 @@
+#+ summary:  Which sources they consider in describin musical features? i.e. audio files, metadata or notated music .
+#+ tags:
+#+    - ontologies
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?categoryLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://dbpedia.org/ontology/category> ?category .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel in ('Ontology', "Schema")) .
+   ?category rdfs:label ?categoryLabel .
+}
+GROUP BY ?categoryLabel ?count
+ORDER BY desc(?count)

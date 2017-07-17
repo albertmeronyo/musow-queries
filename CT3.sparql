@@ -1,0 +1,17 @@
+#+ summary:  What type of resources gathered by means of catalogs? e.g. datasets, repositories, digital editions. 
+#+ tags:
+#+    - catalogs
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?resourceTypeLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?catalogue rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?catalogueType .
+   ?catalogueType rdfs:label ?typeLabel . filter(?typeLabel="Catalogue") .
+   ?resource <http://purl.org/spar/fabio/hasSubjectTerm> ?catalogue ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?type .
+   ?type rdfs:label ?resourceTypeLabel .
+}
+GROUP BY ?categoryLabel ?count
+ORDER BY ?count

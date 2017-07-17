@@ -1,0 +1,18 @@
+#+ summary:  What is the relation between the provision of structured data on symbolic notation and scale?
+#+ tags:
+#+    - libraries-repositories
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?extentLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?resourceLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://purl.org/dc/terms/extent> ?extent ; 
+             <http://schema.org/featureList> 
+                  <http://data.open.ac.uk/mudow/ontology/feature/symbolic-machine-readable> .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   ?scope rdfs:label ?scopeLabel . ?extent rdfs:label ?extentLabel
+} 
+GROUP BY ?extentLabel ?count
+ORDER BY ?extentLabel DESC(?count)

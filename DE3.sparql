@@ -1,0 +1,16 @@
+#+ summary:  What is their scope?
+#+ tags:
+#+    - digital-editions
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?scopeLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://www.w3.org/ns/oa#hasScope> ?scope .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Digital edition') .
+   ?scope rdfs:label ?scopeLabel .
+}
+GROUP BY ?scopeLabel ?count
+ORDER BY DESC(?count)

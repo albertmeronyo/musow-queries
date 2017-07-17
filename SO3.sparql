@@ -1,0 +1,16 @@
+#+ summary:  Which features are best described by means of them? 
+#+ tags:
+#+    - ontologies
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?featureLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?resourceLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://xmlns.com/foaf/0.1/primaryTopic> ?feature .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel in ('Ontology', "Schema")) .
+   ?feature rdfs:label ?featureLabel .
+}
+GROUP BY ?featureLabel ?count
+ORDER BY DESC(?count) ?featureLabel

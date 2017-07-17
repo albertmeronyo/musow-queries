@@ -1,0 +1,16 @@
+#+ summary:  In which kind of resources are researchers interested? Results refer to resources that provide audio files, metadata or symbolic notation, as described in GQ5.
+#+ tags:
+#+    - general
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?categoryLabel (count(DISTINCT ?resource) AS ?count) 
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+  ?resource <http://purl.org/dc/terms/audience> ?typeaudience ; 
+  			<http://dbpedia.org/ontology/category> ?category .
+  ?category rdfs:label ?categoryLabel .
+  ?typeaudience rdfs:label ?audience .
+  filter(?audience="researchers") .
+}
+GROUP BY ?categoryLabel ?count
+ORDER BY ?count

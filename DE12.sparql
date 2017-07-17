@@ -1,0 +1,18 @@
+#+ summary:  In which situation/task are resources reused in digital editions?
+#+ tags:
+#+    - digital-editions
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?otherLabel ?taskLabel
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?resourceLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://data.open.ac.uk/mudow/ontology/situation/task> ?task ; 
+             <http://www.w3.org/2004/02/skos/core#related> ?otherResource . 
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Digital edition') .
+   ?task rdfs:label ?taskLabel . 
+   ?otherResource rdfs:label ?otherLabel
+}
+GROUP BY ?otherLabel ?taskLabel
+ORDER BY ?otherLabel

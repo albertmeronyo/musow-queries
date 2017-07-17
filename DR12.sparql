@@ -1,0 +1,18 @@
+#+ summary:  What is the relation between scope and machine readable data about symbolic notation?
+#+ tags:
+#+    - libraries-repositories
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?scopeLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?resourceLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://www.w3.org/ns/oa#hasScope> ?scope ; 
+             <http://schema.org/featureList> 
+                <http://data.open.ac.uk/mudow/ontology/feature/symbolic-machine-readable> .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   ?scope rdfs:label ?scopeLabel .
+}
+GROUP BY ?scopeLabel ?count
+ORDER BY ?scopeLabel DESC(?count)

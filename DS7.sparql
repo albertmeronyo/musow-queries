@@ -1,0 +1,18 @@
+#+ summary:  Which services are offered to access data? e.g. API, SPARQL endpoint, queryable interfaces
+#+ tags:
+#+    - datasets
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?feautureListLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?resourceLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://xmlns.com/foaf/0.1/primaryTopic> ?feature ;
+             <http://schema.org/featureList> ?feautureList .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Dataset') .
+   ?feautureList rdfs:label ?feautureListLabel .
+   ?feature rdfs:label ?featureLabel .
+}
+GROUP BY ?feautureListLabel ?count
+ORDER BY DESC(?count)

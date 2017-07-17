@@ -1,0 +1,16 @@
+#+ summary:  Which standards/formats do they use?
+#+ tags:
+#+    - services-software
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?formatLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel in ('Software', 'Service')) .
+   ?format rdfs:label ?formatLabel .
+}
+GROUP BY ?formatLabel ?count
+ORDER BY DESC(?count)

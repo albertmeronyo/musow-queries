@@ -1,0 +1,15 @@
+#+ summary:  Which one (audio/score) offers more information on features? i.e. how many resources dealing with audio offer information on melody, harmony, rhythm… and how many resources focused on scores offer the same information?
+#+ tags:
+#+    - symbolic-notation
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?typeLabel ?featureLabel (count(DISTINCT ?resource) AS ?symbCount)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource <http://xmlns.com/foaf/0.1/primaryTopic> ?feature ;
+             <http://dbpedia.org/ontology/category> ?resourceType .
+  ?resourceType rdfs:label ?typeLabel .
+  ?feature rdfs:label ?featureLabel .
+}
+GROUP BY ?typeLabel ?featureLabel ?symbCount 
+ORDER BY ?typeLabel desc(?symbCount) ?featureLabel 

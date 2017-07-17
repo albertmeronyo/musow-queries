@@ -1,0 +1,17 @@
+#+ summary:  What is the target audience of resources gathered by means of catalogs? 
+#+ tags:
+#+    - catalogs
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT (count(DISTINCT ?resource) AS ?count) ?audience
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?catalogue rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?catalogueType .
+   ?catalogueType rdfs:label ?typeLabel . filter(?typeLabel="Catalogue") .
+   ?resource <http://purl.org/spar/fabio/hasSubjectTerm> ?catalogue ; 
+             <http://purl.org/dc/terms/audience> ?typeaudience .
+   ?typeaudience rdfs:label ?audience .
+}
+GROUP BY ?audience
+ORDER BY ?count

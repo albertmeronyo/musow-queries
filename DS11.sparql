@@ -1,0 +1,14 @@
+#+ summary:  What is the purpose? Entertainment?
+#+ tags:
+#+    - datasets
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://purl.org/dc/terms/audience> ?typeaudience .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Dataset') .
+   ?typeaudience rdfs:label ?audience . filter(?audience IN ("amateurs", "listeners")) .
+}

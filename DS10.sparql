@@ -1,0 +1,16 @@
+#+ summary:  What is the purpose? Learning or research? 
+#+ tags:
+#+    - datasets
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?purposeLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://www.w3.org/ns/oa#hasPurpose> ?purpose .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Dataset') .
+   ?purpose rdfs:label ?purposeLabel .
+}
+GROUP BY ?purposeLabel ?count
+ORDER BY DESC(?count)

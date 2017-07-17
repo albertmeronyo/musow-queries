@@ -1,0 +1,11 @@
+#+ summary:  How many resources on the web offer a symbolic representation of music?
+#+ tags:
+#+    - symbolic-notation
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource <http://schema.org/featureList> 
+                <http://data.open.ac.uk/mudow/ontology/feature/symbolic-machine-readable> .
+}

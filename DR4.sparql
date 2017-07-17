@@ -1,0 +1,17 @@
+#+ summary:  What are the most/least used formats compared to scale?
+#+ tags:
+#+    - libraries-repositories
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?extentLabel ?formatLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource rdfs:label ?catalogueLabel ; 
+             <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://purl.org/dc/terms/extent> ?extent ; 
+             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   ?extent rdfs:label ?extentLabel . ?format rdfs:label ?formatLabel .
+}
+GROUP BY ?extentLabel ?formatLabel ?count
+ORDER BY ?extentLabel DESC(?count)

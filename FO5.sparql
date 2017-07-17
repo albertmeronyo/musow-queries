@@ -1,0 +1,15 @@
+#+ summary:  In which situations/tasks are they used? How many times?
+#+ tags:
+#+    - formats
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?formatLabel ?taskLabel (count(DISTINCT ?resource) AS ?count)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource <http://data.open.ac.uk/mudow/ontology/scope/format> ?format ;
+             <http://data.open.ac.uk/mudow/ontology/situation/task> ?task .
+   ?task rdfs:label ?taskLabel .
+   ?format rdfs:label ?formatLabel .
+}
+GROUP BY ?taskLabel ?formatLabel ?count
+ORDER BY ?formatLabel desc(?count)

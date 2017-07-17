@@ -1,0 +1,13 @@
+#+ summary:  How many projects extract features/metadata from audio files rather than scores? 
+#+ tags:
+#+    - symbolic-notation
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?typeLabel (count(DISTINCT ?resource) AS ?symbCount)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+  ?resource <http://dbpedia.org/ontology/category> ?resourceType .
+  ?resourceType rdfs:label ?typeLabel .
+}
+GROUP BY ?typeLabel ?symbCount 
+ORDER BY ?typeLabel desc(?symbCount)

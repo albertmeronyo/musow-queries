@@ -1,0 +1,15 @@
+#+ summary:  When features are represented, what are the main tasks? 
+#+ tags:
+#+    - symbolic-notation
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?taskLabel ?featureLabel (count(DISTINCT ?resource) AS ?symbCount)
+FROM <http://data.open.ac.uk/context/mudow>
+WHERE {
+   ?resource <http://xmlns.com/foaf/0.1/primaryTopic> ?feature ;
+             <http://data.open.ac.uk/mudow/ontology/situation/task> ?task .
+   ?task rdfs:label ?taskLabel .
+  ?feature rdfs:label ?featureLabel .
+}
+GROUP BY ?taskLabel ?featureLabel ?symbCount 
+ORDER BY ?taskLabel  ?featureLabel desc(?symbCount) 
