@@ -11,3 +11,4 @@ WHERE {
   filter(?typeLabel="Catalogue") .
   ?resource <http://purl.org/spar/fabio/hasSubjectTerm> ?catalogue
 }
+GROUP BY ?catalogueLabel
