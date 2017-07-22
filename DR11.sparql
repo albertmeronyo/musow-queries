@@ -10,7 +10,9 @@ WHERE {
              <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
              <http://www.w3.org/ns/oa#hasScope> ?scope ; 
              <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
-   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Repository")} 
+      UNION 
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Digital Library")} .
    ?format rdfs:label ?formatLabel .
    ?scope rdfs:label ?scopeLabel .
 }

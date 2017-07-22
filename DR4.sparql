@@ -10,7 +10,9 @@ WHERE {
              <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
              <http://purl.org/dc/terms/extent> ?extent ; 
              <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
-   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Repository")} 
+      UNION 
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Digital Library")} .
    ?extent rdfs:label ?extentLabel . ?format rdfs:label ?formatLabel .
 }
 GROUP BY ?extentLabel ?formatLabel ?count

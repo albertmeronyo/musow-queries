@@ -1,6 +1,6 @@
 import pprint
 
-keys = {'GQ' : 'general', 'CT' : 'catalogs', 'DR': 'libraries-repositories', 'DS' : 'datasets', 'DE' : 'digital-editions', 'SS': 'services-software', 'SO' : 'ontologies', 'FO' : 'formats', 'SN' : 'symbolic-notation'}
+keys = {'GQ' : 'general', 'CT' : 'catalogs', 'DR': 'libraries-repositories', 'DS' : 'datasets', 'DE' : 'digital-editions', 'SS': 'services-software', 'SO' : 'ontologies', 'FO' : 'formats', 'SN' : 'symbolic-notation', 'LD' : 'linked-open-datasets'}
 
 f = open('README.md', 'r')
 c = f.read()
@@ -8,9 +8,12 @@ l = c.split('</pre>')
 names = []
 for x in l:
     if len(x.split('**')) > 1:
-        names.append(x.split('**')[1][:-1])
+        if x.split('**')[1][-1] == '.':
+            names.append(x.split('**')[1][:-1])
+        else:
+            names.append(x.split('**')[1])
 
-names = names[-88:]
+names = names[-91:]
 l = l[:-1]
 d = {}
 

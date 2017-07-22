@@ -9,7 +9,9 @@ WHERE {
    ?resource rdfs:label ?catalogueLabel ; 
              <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
              <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
-   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Repository")} 
+      UNION 
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Digital Library")} .
    filter( str(?format) IN ("http://data.open.ac.uk/mudow/midi" , "http://data.open.ac.uk/mudow/mp3", 
     "http://data.open.ac.uk/mudow/audio", "http://data.open.ac.uk/mudow/video", "http://data.open.ac.uk/mudow/finale", "http://data.open.ac.uk/mudow/sibelius", "http://data.open.ac.uk/mudow/flac"))
 }

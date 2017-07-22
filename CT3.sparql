@@ -13,5 +13,5 @@ WHERE {
              <http://purl.org/spar/datacite/hasGeneralResourceType> ?type .
    ?type rdfs:label ?resourceTypeLabel .
 }
-GROUP BY ?categoryLabel ?count
+GROUP BY ?resourceTypeLabel ?count
 ORDER BY ?count

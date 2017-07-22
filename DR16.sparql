@@ -9,5 +9,7 @@ WHERE {
    ?resource rdfs:label ?catalogueLabel ; 
              <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
              <http://data.open.ac.uk/mudow/ontology/access/type> "Free" . 
-   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Repository")} 
+      UNION 
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Digital Library")} .
 }

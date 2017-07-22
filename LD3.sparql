@@ -1,0 +1,16 @@
+#+ summary:  In which tasks or situation are they used?
+#+ tags:
+#+    - linked-open-datasets
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?taskLabel (count(DISTINCT ?resource) AS ?count)
+WHERE {
+   ?resource <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format ;
+             <http://data.open.ac.uk/mudow/ontology/situation/task> ?task .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Dataset') . 
+   ?format rdfs:label ?formatLabel . filter(?formatLabel='RDF').
+   ?task rdfs:label ?taskLabel .
+}
+GROUP BY ?taskLabel ?count
+ORDER BY DESC(?count)

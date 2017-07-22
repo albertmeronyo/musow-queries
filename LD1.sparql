@@ -1,0 +1,18 @@
+#+ summary:  What’s the main source of LOD on music?
+#+ tags:
+#+    - linked-open-datasets
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?categoryLabel (count(DISTINCT ?resource) AS ?count)
+WHERE {
+   ?resource <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
+             <http://xmlns.com/foaf/0.1/primaryTopic> ?feature ;
+             <http://dbpedia.org/ontology/category> ?category ;
+             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Dataset') .
+   ?format rdfs:label ?formatLabel . filter(?formatLabel='RDF')
+   ?category rdfs:label ?categoryLabel .
+   ?feature rdfs:label ?featureLabel .
+}
+GROUP BY ?categoryLabel ?count
+ORDER BY DESC(?count)

@@ -11,7 +11,9 @@ WHERE {
              <http://purl.org/dc/terms/extent> ?extent ; 
              <http://schema.org/featureList> 
                   <http://data.open.ac.uk/mudow/ontology/feature/symbolic-machine-readable> .
-   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Repository")} 
+      UNION 
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Digital Library")} .
    ?scope rdfs:label ?scopeLabel . ?extent rdfs:label ?extentLabel
 } 
 GROUP BY ?extentLabel ?count

@@ -8,5 +8,7 @@ FROM <http://data.open.ac.uk/context/mudow>
 WHERE {
    ?resource rdfs:label ?catalogueLabel ; 
              <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType .
-   ?resourceType rdfs:label ?typeLabel . filter(?typeLabel IN ("Repository", "Digital library")) .
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Repository")} 
+      UNION 
+   {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Digital Library")} .
 }
