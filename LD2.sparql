@@ -7,7 +7,7 @@ SELECT ?feautureListLabel (count(DISTINCT ?resource) AS ?count)
 WHERE {
    ?resource <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
              <http://schema.org/featureList> ?feautureList ;
-             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+             <http://data.open.ac.uk/musow/ontology/scope/format> ?format .
    ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Dataset') .
    ?feautureList rdfs:label ?feautureListLabel .
    ?format rdfs:label ?formatLabel . filter(?formatLabel='RDF') .

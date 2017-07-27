@@ -3,7 +3,7 @@
 #+    - general
 
 SELECT (COUNT(?s) as ?count)
-FROM <http://data.open.ac.uk/context/mudow>
+FROM <http://data.open.ac.uk/context/musow>
 WHERE {
    ?s <http://xmlns.com/foaf/0.1/homepage> ?o .
 }

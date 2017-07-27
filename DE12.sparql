@@ -4,11 +4,11 @@
 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?otherLabel ?taskLabel
-FROM <http://data.open.ac.uk/context/mudow>
+FROM <http://data.open.ac.uk/context/musow>
 WHERE {
    ?resource rdfs:label ?resourceLabel ; 
              <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
-             <http://data.open.ac.uk/mudow/ontology/situation/task> ?task ; 
+             <http://data.open.ac.uk/musow/ontology/situation/task> ?task ; 
              <http://www.w3.org/2004/02/skos/core#related> ?otherResource . 
    ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Digital edition') .
    ?task rdfs:label ?taskLabel . 

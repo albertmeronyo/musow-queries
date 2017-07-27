@@ -4,10 +4,10 @@
 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?extentLabel (count(DISTINCT ?resource) AS ?count)
-FROM <http://data.open.ac.uk/context/mudow>
+FROM <http://data.open.ac.uk/context/musow>
 WHERE {
    ?resource <http://schema.org/featureList> 
-                <http://data.open.ac.uk/mudow/ontology/feature/symbolic-machine-readable> ;
+                <http://data.open.ac.uk/musow/ontology/feature/symbolic-machine-readable> ;
              <http://purl.org/dc/terms/extent> ?extent.
   ?extent rdfs:label ?extentLabel . 
 }

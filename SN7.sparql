@@ -4,7 +4,7 @@
 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?typeLabel (count(DISTINCT ?resource) AS ?symbCount)
-FROM <http://data.open.ac.uk/context/mudow>
+FROM <http://data.open.ac.uk/context/musow>
 WHERE {
   ?resource <http://dbpedia.org/ontology/category> ?resourceType .
   ?resourceType rdfs:label ?typeLabel .

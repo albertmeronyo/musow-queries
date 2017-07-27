@@ -4,7 +4,7 @@
 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?catalogueLabel (count(?resource) AS ?count)  
-FROM <http://data.open.ac.uk/context/mudow>
+FROM <http://data.open.ac.uk/context/musow>
 WHERE {
   ?catalogue rdfs:label ?catalogueLabel ; <http://purl.org/spar/datacite/hasGeneralResourceType> ?catalogueType .
   ?catalogueType rdfs:label ?typeLabel .

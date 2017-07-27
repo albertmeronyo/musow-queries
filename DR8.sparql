@@ -4,14 +4,14 @@
 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT (count(DISTINCT ?resource) AS ?count)
-FROM <http://data.open.ac.uk/context/mudow>
+FROM <http://data.open.ac.uk/context/musow>
 WHERE {
    ?resource rdfs:label ?catalogueLabel ; 
              <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
-             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+             <http://data.open.ac.uk/musow/ontology/scope/format> ?format .
    {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Repository")} 
       UNION 
    {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Digital Library")} .
-   filter( str(?format) IN ("http://data.open.ac.uk/mudow/musicxml" , "http://data.open.ac.uk/mudow/xml", 
-    "http://data.open.ac.uk/mudow/rdf", "http://data.open.ac.uk/mudow/mei/xml", "http://data.open.ac.uk/mudow/cap/xml", "http://data.open.ac.uk/mudow/humdrum", "http://data.open.ac.uk/mudow/kern", "http://data.open.ac.uk/mudow/lilypond", "http://data.open.ac.uk/mudow/musedata", "http://data.open.ac.uk/mudow/musescore", "http://data.open.ac.uk/mudow/myr", "http://data.open.ac.uk/mudow/noteworthy", "http://data.open.ac.uk/mudow/py", "http://data.open.ac.uk/mudow/ram", "http://data.open.ac.uk/mudow/mu2"))
+   filter( str(?format) IN ("http://data.open.ac.uk/musow/musicxml" , "http://data.open.ac.uk/musow/xml", 
+    "http://data.open.ac.uk/musow/rdf", "http://data.open.ac.uk/musow/mei/xml", "http://data.open.ac.uk/musow/cap/xml", "http://data.open.ac.uk/musow/humdrum", "http://data.open.ac.uk/musow/kern", "http://data.open.ac.uk/musow/lilypond", "http://data.open.ac.uk/musow/musedata", "http://data.open.ac.uk/musow/musescore", "http://data.open.ac.uk/musow/myr", "http://data.open.ac.uk/musow/noteworthy", "http://data.open.ac.uk/musow/py", "http://data.open.ac.uk/musow/ram", "http://data.open.ac.uk/musow/mu2"))
 }

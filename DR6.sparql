@@ -4,14 +4,14 @@
 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT (count(DISTINCT ?resource) AS ?count)
-FROM <http://data.open.ac.uk/context/mudow>
+FROM <http://data.open.ac.uk/context/musow>
 WHERE {
    ?resource rdfs:label ?catalogueLabel ; 
              <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
-             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+             <http://data.open.ac.uk/musow/ontology/scope/format> ?format .
    {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Repository")} 
       UNION 
    {?resourceType rdfs:label ?typeLabel . filter(?typeLabel="Digital Library")} .
-   filter( str(?format) IN ("http://data.open.ac.uk/mudow/pdf" , "http://data.open.ac.uk/mudow/jpg", 
-    "http://data.open.ac.uk/mudow/tiff", "http://data.open.ac.uk/mudow/iiif", "http://data.open.ac.uk/mudow/gif", "http://data.open.ac.uk/mudow/png", "http://data.open.ac.uk/mudow/djvu"))
+   filter( str(?format) IN ("http://data.open.ac.uk/musow/pdf" , "http://data.open.ac.uk/musow/jpg", 
+    "http://data.open.ac.uk/musow/tiff", "http://data.open.ac.uk/musow/iiif", "http://data.open.ac.uk/musow/gif", "http://data.open.ac.uk/musow/png", "http://data.open.ac.uk/musow/djvu"))
 }

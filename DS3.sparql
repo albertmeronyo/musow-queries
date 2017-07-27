@@ -4,12 +4,12 @@
 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?extentLabel ?formatLabel (count(DISTINCT ?resource) AS ?count)
-FROM <http://data.open.ac.uk/context/mudow>
+FROM <http://data.open.ac.uk/context/musow>
 WHERE {
    ?resource rdfs:label ?catalogueLabel ; 
              <http://purl.org/spar/datacite/hasGeneralResourceType> ?resourceType ;
              <http://purl.org/dc/terms/extent> ?extent ; 
-             <http://data.open.ac.uk/mudow/ontology/scope/format> ?format .
+             <http://data.open.ac.uk/musow/ontology/scope/format> ?format .
    ?resourceType rdfs:label ?typeLabel . filter(?typeLabel='Dataset') .
    ?extent rdfs:label ?extentLabel . ?format rdfs:label ?formatLabel .
 }

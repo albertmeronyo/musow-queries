@@ -4,10 +4,10 @@
 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?formatLabel ?taskLabel (count(DISTINCT ?resource) AS ?count)
-FROM <http://data.open.ac.uk/context/mudow>
+FROM <http://data.open.ac.uk/context/musow>
 WHERE {
-   ?resource <http://data.open.ac.uk/mudow/ontology/scope/format> ?format ;
-             <http://data.open.ac.uk/mudow/ontology/situation/task> ?task .
+   ?resource <http://data.open.ac.uk/musow/ontology/scope/format> ?format ;
+             <http://data.open.ac.uk/musow/ontology/situation/task> ?task .
    ?task rdfs:label ?taskLabel .
    ?format rdfs:label ?formatLabel .
 }
